@@ -10,7 +10,7 @@
  * @author Robert Konigsberg (konigsberg@google.com)
  */
 
-(function() {
+var DygraphInteraction = (function() {
 /*global Dygraph:false */
 "use strict";
 
@@ -25,7 +25,7 @@ var DRAG_EDGE_MARGIN = 100;
  * A collection of functions to facilitate build custom interaction models.
  * @class
  */
-Dygraph.Interaction = {};
+DygraphInteraction = {};
 
 /**
  * Checks whether the beginning & ending of an event were close enough that it
@@ -36,7 +36,7 @@ Dygraph.Interaction = {};
  * @param {Dygraph} g
  * @param {Object} context
  */
-Dygraph.Interaction.maybeTreatMouseOpAsClick = function(event, g, context) {
+DygraphInteraction.maybeTreatMouseOpAsClick = function(event, g, context) {
   context.dragEndX = Dygraph.dragGetX_(event, context);
   context.dragEndY = Dygraph.dragGetY_(event, context);
   var regionWidth = Math.abs(context.dragEndX - context.dragStartX);
@@ -44,7 +44,7 @@ Dygraph.Interaction.maybeTreatMouseOpAsClick = function(event, g, context) {
 
   if (regionWidth < 2 && regionHeight < 2 &&
       g.lastx_ !== undefined && g.lastx_ != -1) {
-    Dygraph.Interaction.treatMouseOpAsClick(g, event, context);
+    DygraphInteraction.treatMouseOpAsClick(g, event, context);
   }
 
   context.regionWidth = regionWidth;
@@ -65,7 +65,7 @@ Dygraph.Interaction.maybeTreatMouseOpAsClick = function(event, g, context) {
  *     dragStartX/dragStartY/etc. properties). This function modifies the
  *     context.
  */
-Dygraph.Interaction.startPan = function(event, g, context) {
+DygraphInteraction.startPan = function(event, g, context) {
   var i, axis;
   context.isPanning = true;
   var xRange = g.xAxisRange();
@@ -151,7 +151,7 @@ Dygraph.Interaction.startPan = function(event, g, context) {
  *     dragStartX/dragStartY/etc. properties). This function modifies the
  *     context.
  */
-Dygraph.Interaction.movePan = function(event, g, context) {
+DygraphInteraction.movePan = function(event, g, context) {
   context.dragEndX = Dygraph.dragGetX_(event, context);
   context.dragEndY = Dygraph.dragGetY_(event, context);
 
@@ -228,7 +228,7 @@ Dygraph.Interaction.movePan = function(event, g, context) {
  *     dragStartX/dragStartY/etc. properties). This function modifies the
  *     context.
  */
-Dygraph.Interaction.endPan = Dygraph.Interaction.maybeTreatMouseOpAsClick;
+DygraphInteraction.endPan = DygraphInteraction.maybeTreatMouseOpAsClick;
 
 /**
  * Called in response to an interaction model operation that
@@ -244,7 +244,7 @@ Dygraph.Interaction.endPan = Dygraph.Interaction.maybeTreatMouseOpAsClick;
  *     dragStartX/dragStartY/etc. properties). This function modifies the
  *     context.
  */
-Dygraph.Interaction.startZoom = function(event, g, context) {
+DygraphInteraction.startZoom = function(event, g, context) {
   context.isZooming = true;
   context.zoomMoved = false;
 };
@@ -263,7 +263,7 @@ Dygraph.Interaction.startZoom = function(event, g, context) {
  *     dragStartX/dragStartY/etc. properties). This function modifies the
  *     context.
  */
-Dygraph.Interaction.moveZoom = function(event, g, context) {
+DygraphInteraction.moveZoom = function(event, g, context) {
   context.zoomMoved = true;
   context.dragEndX = Dygraph.dragGetX_(event, context);
   context.dragEndY = Dygraph.dragGetY_(event, context);
@@ -295,7 +295,7 @@ Dygraph.Interaction.moveZoom = function(event, g, context) {
  * @param {Event} event
  * @param {Object} context
  */
-Dygraph.Interaction.treatMouseOpAsClick = function(g, event, context) {
+DygraphInteraction.treatMouseOpAsClick = function(g, event, context) {
   var clickCallback = g.getFunctionOption('clickCallback');
   var pointClickCallback = g.getFunctionOption('pointClickCallback');
 
@@ -370,10 +370,10 @@ Dygraph.Interaction.treatMouseOpAsClick = function(g, event, context) {
  *     dragStartX/dragStartY/etc. properties). This function modifies the
  *     context.
  */
-Dygraph.Interaction.endZoom = function(event, g, context) {
+DygraphInteraction.endZoom = function(event, g, context) {
   g.clearZoomRect_();
   context.isZooming = false;
-  Dygraph.Interaction.maybeTreatMouseOpAsClick(event, g, context);
+  DygraphInteraction.maybeTreatMouseOpAsClick(event, g, context);
 
   // The zoom rectangle is visibly clipped to the plot area, so its behavior
   // should be as well.
@@ -407,7 +407,7 @@ Dygraph.Interaction.endZoom = function(event, g, context) {
 /**
  * @private
  */
-Dygraph.Interaction.startTouch = function(event, g, context) {
+DygraphInteraction.startTouch = function(event, g, context) {
   event.preventDefault();  // touch browsers are all nice.
   if (event.touches.length > 1) {
     // If the user ever puts two fingers down, it's not a double tap.
@@ -471,7 +471,7 @@ Dygraph.Interaction.startTouch = function(event, g, context) {
 /**
  * @private
  */
-Dygraph.Interaction.moveTouch = function(event, g, context) {
+DygraphInteraction.moveTouch = function(event, g, context) {
   // If the tap moves, then it's definitely not part of a double-tap.
   context.startTimeForDoubleTapMs = null;
 
@@ -564,10 +564,10 @@ Dygraph.Interaction.moveTouch = function(event, g, context) {
 /**
  * @private
  */
-Dygraph.Interaction.endTouch = function(event, g, context) {
+DygraphInteraction.endTouch = function(event, g, context) {
   if (event.touches.length !== 0) {
     // this is effectively a "reset"
-    Dygraph.Interaction.startTouch(event, g, context);
+    DygraphInteraction.startTouch(event, g, context);
   } else if (event.changedTouches.length == 1) {
     // Could be part of a "double tap"
     // The heuristic here is that it's a double-tap if the two touchend events
@@ -630,7 +630,7 @@ var distanceFromChart = function(event, g) {
  *   }
  * } );
  */
-Dygraph.Interaction.defaultModel = {
+DygraphInteraction.defaultModel = {
   // Track the beginning of drag events
   mousedown: function(event, g, context) {
     // Right-click should not initiate a zoom.
@@ -669,7 +669,7 @@ Dygraph.Interaction.defaultModel = {
         if (context.dragEndX !== null) {
           Dygraph.endZoom(event, g, context);
         } else {
-          Dygraph.Interaction.maybeTreatMouseOpAsClick(event, g, context);
+          DygraphInteraction.maybeTreatMouseOpAsClick(event, g, context);
         }
       } else if (context.isPanning) {
         Dygraph.endPan(event, g, context);
@@ -686,13 +686,13 @@ Dygraph.Interaction.defaultModel = {
   willDestroyContextMyself: true,
 
   touchstart: function(event, g, context) {
-    Dygraph.Interaction.startTouch(event, g, context);
+    DygraphInteraction.startTouch(event, g, context);
   },
   touchmove: function(event, g, context) {
-    Dygraph.Interaction.moveTouch(event, g, context);
+    DygraphInteraction.moveTouch(event, g, context);
   },
   touchend: function(event, g, context) {
-    Dygraph.Interaction.endTouch(event, g, context);
+    DygraphInteraction.endTouch(event, g, context);
   },
 
   // Disable zooming out if panning.
@@ -718,26 +718,26 @@ Dygraph.Interaction.defaultModel = {
   }
 };
 
-Dygraph.DEFAULT_ATTRS.interactionModel = Dygraph.Interaction.defaultModel;
+Dygraph.DEFAULT_ATTRS.interactionModel = DygraphInteraction.defaultModel;
 
 // old ways of accessing these methods/properties
-Dygraph.defaultInteractionModel = Dygraph.Interaction.defaultModel;
-Dygraph.endZoom = Dygraph.Interaction.endZoom;
-Dygraph.moveZoom = Dygraph.Interaction.moveZoom;
-Dygraph.startZoom = Dygraph.Interaction.startZoom;
-Dygraph.endPan = Dygraph.Interaction.endPan;
-Dygraph.movePan = Dygraph.Interaction.movePan;
-Dygraph.startPan = Dygraph.Interaction.startPan;
+Dygraph.defaultInteractionModel = DygraphInteraction.defaultModel;
+Dygraph.endZoom = DygraphInteraction.endZoom;
+Dygraph.moveZoom = DygraphInteraction.moveZoom;
+Dygraph.startZoom = DygraphInteraction.startZoom;
+Dygraph.endPan = DygraphInteraction.endPan;
+Dygraph.movePan = DygraphInteraction.movePan;
+Dygraph.startPan = DygraphInteraction.startPan;
 
-Dygraph.Interaction.nonInteractiveModel_ = {
+DygraphInteraction.nonInteractiveModel_ = {
   mousedown: function(event, g, context) {
     context.initializeMouseDown(event, g, context);
   },
-  mouseup: Dygraph.Interaction.maybeTreatMouseOpAsClick
+  mouseup: DygraphInteraction.maybeTreatMouseOpAsClick
 };
 
 // Default interaction model when using the range selector.
-Dygraph.Interaction.dragIsPanInteractionModel = {
+DygraphInteraction.dragIsPanInteractionModel = {
   mousedown: function(event, g, context) {
     context.initializeMouseDown(event, g, context);
     Dygraph.startPan(event, g, context);
@@ -753,5 +753,7 @@ Dygraph.Interaction.dragIsPanInteractionModel = {
     }
   }
 };
+
+return DygraphInteraction;
 
 })();
