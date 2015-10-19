@@ -26,7 +26,7 @@
     // "src/dygraph-gviz.js",
     "src/dygraph-interaction-model.js",
     "src/dygraph-tickers.js",
-    "src/dygraph-plugin-base.js",
+    // "src/dygraph-plugin-base.js",
     // "src/plugins/annotations.js",
     // "src/plugins/axes.js",
     // "src/plugins/chart-labels.js",

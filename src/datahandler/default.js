@@ -18,11 +18,11 @@
  * @constructor
  * @extends Dygraph.DataHandler
  */
-Dygraph.DataHandlers.DefaultHandler = function() {
+DygraphDataHandlers.DefaultHandler = function() {
 };
 
-var DefaultHandler = Dygraph.DataHandlers.DefaultHandler;
-DefaultHandler.prototype = new Dygraph.DataHandler();
+var DefaultHandler = DygraphDataHandlers.DefaultHandler;
+DefaultHandler.prototype = new DygraphDataHandler();
 
 /** @inheritDoc */
 DefaultHandler.prototype.extractSeries = function(rawData, i, options) {

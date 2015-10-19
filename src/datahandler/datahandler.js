@@ -48,20 +48,20 @@
  * Initially the unified data is created by the extractSeries method
  * @constructor
  */
-Dygraph.DataHandler = function () {
+var DygraphDataHandler = function () {
 };
 
 /**
  * A collection of functions to create and retrieve data handlers.
  * @type {Object.<!Dygraph.DataHandler>}
  */
-Dygraph.DataHandlers = {};
+var DygraphDataHandlers = {};
 
 (function() {
 
 "use strict";
 
-var handler = Dygraph.DataHandler;
+var handler = DygraphDataHandler;
 
 /**
  * X-value array index constant for unified data samples.

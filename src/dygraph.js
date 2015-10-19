@@ -2281,16 +2281,16 @@ Dygraph.prototype.getHandlerClass_ = function() {
     handlerClass =  this.attr_('dataHandler');
   } else if (this.fractions_) {
     if (this.getBooleanOption('errorBars')) {
-      handlerClass = Dygraph.DataHandlers.FractionsBarsHandler;
+      handlerClass = DygraphDataHandlers.FractionsBarsHandler;
     } else {
-      handlerClass = Dygraph.DataHandlers.DefaultFractionHandler;
+      handlerClass = DygraphDataHandlers.DefaultFractionHandler;
     }
   } else if (this.getBooleanOption('customBars')) {
-    handlerClass = Dygraph.DataHandlers.CustomBarsHandler;
+    handlerClass = DygraphDataHandlers.CustomBarsHandler;
   } else if (this.getBooleanOption('errorBars')) {
-    handlerClass = Dygraph.DataHandlers.ErrorBarsHandler;
+    handlerClass = DygraphDataHandlers.ErrorBarsHandler;
   } else {
-    handlerClass = Dygraph.DataHandlers.DefaultHandler;
+    handlerClass = DygraphDataHandlers.DefaultHandler;
   }
   return handlerClass;
 };
