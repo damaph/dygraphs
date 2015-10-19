@@ -173,7 +173,7 @@ DygraphOptions.prototype.reparseSeries = function() {
   }
   Dygraph.update(this.xAxis_.options, axis_opts["x"] || {});
 
-  if (DEBUG) this.validateOptions_();
+  // if (DEBUG) this.validateOptions_();
 };
 
 /**

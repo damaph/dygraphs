@@ -629,16 +629,16 @@ Dygraph.prototype.toString = function() {
  * @return { ... } The value of the option.
  */
 Dygraph.prototype.attr_ = function(name, seriesName) {
-  if (DEBUG) {
-    if (typeof(Dygraph.OPTIONS_REFERENCE) === 'undefined') {
-      console.error('Must include options reference JS for testing');
-    } else if (!Dygraph.OPTIONS_REFERENCE.hasOwnProperty(name)) {
-      console.error('Dygraphs is using property ' + name + ', which has no ' +
-                    'entry in the Dygraphs.OPTIONS_REFERENCE listing.');
-      // Only log this error once.
-      Dygraph.OPTIONS_REFERENCE[name] = true;
-    }
-  }
+  // if (DEBUG) {
+  //   if (typeof(Dygraph.OPTIONS_REFERENCE) === 'undefined') {
+  //     console.error('Must include options reference JS for testing');
+  //   } else if (!Dygraph.OPTIONS_REFERENCE.hasOwnProperty(name)) {
+  //     console.error('Dygraphs is using property ' + name + ', which has no ' +
+  //                   'entry in the Dygraphs.OPTIONS_REFERENCE listing.');
+  //     // Only log this error once.
+  //     Dygraph.OPTIONS_REFERENCE[name] = true;
+  //   }
+  // }
   return seriesName ? this.attributes_.getForSeries(name, seriesName) : this.attributes_.get(name);
 };
 
