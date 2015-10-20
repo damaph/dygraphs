@@ -9,19 +9,18 @@
  * @author David Eberlein (david.eberlein@ch.sauter-bc.com)
  */
 
-(function() {
-
 /*global Dygraph:false */
 "use strict";
+
+import DygraphDataHandler from './datahandler';
 
 /**
  * @constructor
  * @extends Dygraph.DataHandler
  */
-DygraphDataHandlers.DefaultHandler = function() {
+var DefaultHandler = function() {
 };
 
-var DefaultHandler = DygraphDataHandlers.DefaultHandler;
 DefaultHandler.prototype = new DygraphDataHandler();
 
 /** @inheritDoc */
@@ -97,4 +96,4 @@ DefaultHandler.prototype.getExtremeYValues = function(series, dateWindow,
   return [ minY, maxY ];
 };
 
-})();
+export default DefaultHandler;

@@ -41,6 +41,8 @@
 /*global Dygraph:false */
 /*global DygraphLayout:false */
 
+"use strict";
+
 /**
  * 
  * The data handler is responsible for all data specific operations. All of the
@@ -50,16 +52,6 @@
  */
 var DygraphDataHandler = function () {
 };
-
-/**
- * A collection of functions to create and retrieve data handlers.
- * @type {Object.<!Dygraph.DataHandler>}
- */
-var DygraphDataHandlers = {};
-
-(function() {
-
-"use strict";
 
 var handler = DygraphDataHandler;
 
@@ -267,4 +259,4 @@ handler.parseFloat = function(val) {
   return val;
 };
 
-})();
+export default DygraphDataHandler;
