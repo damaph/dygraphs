@@ -289,14 +289,14 @@ export function zeropad(x) {
  * and factory method to call the Date constructor with an array of arguments.
  */
 export var DateAccessorsLocal = {
-  getFullYear:     function(d) {return d.getFullYear();},
-  getMonth:        function(d) {return d.getMonth();},
-  getDate:         function(d) {return d.getDate();},
-  getHours:        function(d) {return d.getHours();},
-  getMinutes:      function(d) {return d.getMinutes();},
-  getSeconds:      function(d) {return d.getSeconds();},
-  getMilliseconds: function(d) {return d.getMilliseconds();},
-  getDay:          function(d) {return d.getDay();},
+  getFullYear:     d => d.getFullYear(),
+  getMonth:        d => d.getMonth(),
+  getDate:         d => d.getDate(),
+  getHours:        d => d.getHours(),
+  getMinutes:      d => d.getMinutes(),
+  getSeconds:      d => d.getSeconds(),
+  getMilliseconds: d => d.getMilliseconds(),
+  getDay:          d => d.getDay(),
   makeDate:        function(y, m, d, hh, mm, ss, ms) {
     return new Date(y, m, d, hh, mm, ss, ms);
   }
@@ -308,14 +308,14 @@ export var DateAccessorsLocal = {
  * and factory method to call the Date constructor with an array of arguments.
  */
 export var DateAccessorsUTC = {
-  getFullYear:     function(d) {return d.getUTCFullYear();},
-  getMonth:        function(d) {return d.getUTCMonth();},
-  getDate:         function(d) {return d.getUTCDate();},
-  getHours:        function(d) {return d.getUTCHours();},
-  getMinutes:      function(d) {return d.getUTCMinutes();},
-  getSeconds:      function(d) {return d.getUTCSeconds();},
-  getMilliseconds: function(d) {return d.getUTCMilliseconds();},
-  getDay:          function(d) {return d.getUTCDay();},
+  getFullYear:     d => d.getUTCFullYear(),
+  getMonth:        d => d.getUTCMonth(),
+  getDate:         d => d.getUTCDate(),
+  getHours:        d => d.getUTCHours(),
+  getMinutes:      d => d.getUTCMinutes(),
+  getSeconds:      d => d.getUTCSeconds(),
+  getMilliseconds: d => d.getUTCMilliseconds(),
+  getDay:          d => d.getUTCDay(),
   makeDate:        function(y, m, d, hh, mm, ss, ms) {
     return new Date(Date.UTC(y, m, d, hh, mm, ss, ms));
   }
@@ -422,7 +422,7 @@ export function binarySearch(val, arry, abs, low, high) {
         return mid;
       }
     }
-    return Dygraph.binarySearch(val, arry, abs, low, mid - 1);
+    return binarySearch(val, arry, abs, low, mid - 1);
   } else if (element < val) {
     if (abs < 0) {
       // Accept if element < val, but also if prior element > val.
@@ -431,7 +431,7 @@ export function binarySearch(val, arry, abs, low, high) {
         return mid;
       }
     }
-    return Dygraph.binarySearch(val, arry, abs, mid + 1, high);
+    return binarySearch(val, arry, abs, mid + 1, high);
   }
   return -1;  // can't actually happen, but makes closure compiler happy
 };

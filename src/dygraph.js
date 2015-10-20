@@ -3523,7 +3523,7 @@ Dygraph.addAnnotationRule = function() {
  */
 Dygraph.prototype.addAndTrackEvent = function(elem, type, fn) {
   utils.addEvent(elem, type, fn);
-  this.registeredEvents_.push({ elem : elem, type : type, fn : fn });
+  this.registeredEvents_.push({elem, type, fn});
 };
 
 Dygraph.prototype.removeTrackedEvents_ = function() {
