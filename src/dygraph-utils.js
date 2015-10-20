@@ -347,7 +347,6 @@ export function hmsString_(hh, mm, ss) {
  * @private
  */
 export function dateString_(time, utc) {
-  var zeropad = Dygraph.zeropad;
   var accessors = utc ? DateAccessorsUTC : DateAccessorsLocal;
   var date = new Date(time);
   var y = accessors.getFullYear(date);
@@ -1276,5 +1275,5 @@ export function dateAxisLabelFormatter(date, granularity, opts) {
  * @private
  */
 export function dateValueFormatter(d, opts) {
-  return Dygraph.dateString_(d, opts('labelsUTC'));
+  return dateString_(d, opts('labelsUTC'));
 };

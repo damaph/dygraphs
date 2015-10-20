@@ -57,6 +57,13 @@ import DEFAULT_ATTRS from './dygraph-default-attrs';
 import DygraphDataHandler from './datahandler/datahandler';
 import DefaultHandler from './datahandler/default';
 
+import AnnotationsPlugin from './plugins/annotations';
+import AxesPlugin from './plugins/axes';
+import ChartLabelsPlugin from './plugins/chart-labels';
+import GridPlugin from './plugins/grid';
+import LegendPlugin from './plugins/legend';
+import RangeSelectorPlugin from './plugins/range-selector';
+
 /*global DygraphLayout:false, DygraphCanvasRenderer:false, DygraphOptions:false, G_vmlCanvasManager:false,ActiveXObject:false */
 "use strict";
 
@@ -102,11 +109,6 @@ Dygraph.ANIMATION_DURATION = 200;
  */
 Dygraph.Plotters = DygraphCanvasRenderer._Plotters;
 
-
-// Installed plugins, in order of precedence (most-general to most-specific).
-// Plugins are installed after they are defined, in plugins/install.js.
-Dygraph.PLUGINS = [
-];
 
 // Used for initializing annotation CSS rules only once.
 Dygraph.addedAnnotationCSS = false;
@@ -291,7 +293,7 @@ Dygraph.prototype.cascadeEvents_ = function(name, extra_props) {
       e.propagationStopped = true;
     }
   };
-  Dygraph.update(e, extra_props);
+  utils.update(e, extra_props);
 
   var callback_plugin_pairs = this.eventListeners_[name];
   if (callback_plugin_pairs) {
@@ -3534,5 +3536,16 @@ Dygraph.prototype.removeTrackedEvents_ = function() {
 
   this.registeredEvents_ = [];
 };
+
+
+// Installed plugins, in order of precedence (most-general to most-specific).
+Dygraph.PLUGINS = [
+  LegendPlugin,
+  AxesPlugin,
+  RangeSelectorPlugin, // Has to be before ChartLabels so that its callbacks are called after ChartLabels' callbacks.
+  ChartLabelsPlugin,
+  AnnotationsPlugin,
+  GridPlugin
+];
 
 export default Dygraph;
