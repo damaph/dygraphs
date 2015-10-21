@@ -156,3 +156,21 @@ Dygraph.prototype.indexFromSetName;
 
 /** @type {function(function(!Dygraph))} */
 Dygraph.prototype.ready;
+
+/** @type {function(): Object} */
+Dygraph.prototype.axes;
+
+/** @type {function(): function(number, granularity, opts, dygraph)} */
+Dygraph.prototype.axisLabelFormatter;
+
+/** @type {function(): function(number, granularity, opts, dygraph)} */
+Dygraph.prototype.valueFormatter;
+
+/** @type {function(): number} */
+Dygraph.prototype.rightGap;
+
+/** @type {function(): boolean} */
+Dygraph.prototype.showRangeSelector;
+
+/** @type {function(): Array.<number>} */
+Dygraph.prototype.dateWindow;
