@@ -22,6 +22,9 @@ Dygraph.NAME;
 /** @type {string} */
 Dygraph.VERSION;
 
+/** @type {Array<number>} */
+Dygraph.boundaryIds_
+
 /** @type {function(): string} */
 Dygraph.toString;
 
